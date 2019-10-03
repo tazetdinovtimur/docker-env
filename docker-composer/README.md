@@ -1,0 +1,1 @@
+docker run -it --rm -v /path/to/your/project:/app dkr-composer
