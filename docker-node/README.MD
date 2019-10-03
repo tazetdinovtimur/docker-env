@@ -3,7 +3,7 @@
 Build docker container and tag it:
 
 ```sh
-$ cd docker-composer
+$ cd docker-node
 $ docker build -t dkr-node .
 ```
 ### Run
