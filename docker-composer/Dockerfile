@@ -2,8 +2,8 @@ FROM php:7.2-cli
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-RUN apt-get update -y \
-    && apt-get install -y libpng-dev git zlib1g-dev
+RUN apt-get update
+RUN apt-get install -y libpng-dev git zlib1g-dev
 
 RUN mkdir -p /usr/src/php/ext \
     && cd /usr/src/php/ext \
