@@ -16,6 +16,11 @@ $ docker run -it --rm -v /path/to/project:/app dkr-node
 Install dependencies
 
 ```sh
-$ npm install
-$ npm run build
+app# npm install
+app# npm run build
+```
+Exit container
+
+```sh
+app# exit
 ```

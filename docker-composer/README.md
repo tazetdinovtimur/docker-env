@@ -16,5 +16,10 @@ $ docker run -it --rm -v /path/to/your/project:/app dkr-composer
 Install dependencies
 
 ```sh
-$ composer install
+app# composer install
+```
+Exit container
+
+```sh
+app# exit
 ```
