@@ -2,21 +2,25 @@ FROM php:7.2-cli
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-RUN apt-get update
-RUN apt-get install -y libpng-dev git zlib1g-dev
+RUN apt-get update && apt-get install -y \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libpng-dev \
+        zlib1g-dev \
+        libzip-dev \
+        git
 
-RUN mkdir -p /usr/src/php/ext \
-    && cd /usr/src/php/ext \
-    && curl -fsSL https://github.com/igbinary/igbinary7/archive/master.tar.gz -o igbinary.tar.gz \
-    && mkdir -p igbinary \
-    && tar -xf igbinary.tar.gz -C igbinary --strip-components=1 \
-    && rm igbinary.tar.gz \
-    && docker-php-ext-install igbinary
+RUN pecl install igbinary \
+    && docker-php-ext-enable igbinary
+
+RUN docker-php-ext-install mbstring
+RUN docker-php-ext-install zip
+RUN docker-php-ext-configure gd --with-gd --with-jpeg-dir \
+    --with-png-dir --with-zlib-dir --with-freetype-dir \
+    --enable-gd-native-ttf
 
 RUN docker-php-ext-install gd \
-    && docker-php-ext-install pcntl \
-    && docker-php-ext-install mbstring \
-    && docker-php-ext-install zip
+    && docker-php-ext-install pcntl
 
 WORKDIR /app
 
