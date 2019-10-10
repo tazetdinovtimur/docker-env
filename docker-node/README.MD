@@ -11,7 +11,7 @@ $ docker build -t dkr-node .
 Run the container and mount the volume:
 
 ```sh
-$ docker run -it --rm -v /path/to/project:/app dkr-node
+$ docker run -it --rm -p 8080:8080 -v /path/to/project:/app dkr-node
 ```
 Install dependencies
 
