@@ -1,4 +1,4 @@
-FROM php:7.2-cli
+FROM php:7.3.11-cli
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -21,6 +21,10 @@ RUN docker-php-ext-configure gd --with-gd --with-jpeg-dir \
 
 RUN docker-php-ext-install gd \
     && docker-php-ext-install pcntl
+
+RUN apt-get install -y libpq-dev \
+    && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+    && docker-php-ext-install pdo pdo_pgsql pgsql
 
 WORKDIR /app
 
